@@ -1,7 +1,13 @@
 pragma solidity ^0.4.0;
 
 
+/// @title Chain Message
 contract ChainMessage {
+    /*
+    * @title Chain Message
+    * @author Austin Hester
+    * @dev This line is for developers only
+    */
 
     mapping (address => string) public message;
 
