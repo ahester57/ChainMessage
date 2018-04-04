@@ -11,9 +11,11 @@ contract ChainMessage {
 
     mapping (address => string) public message;
 
+    event SentMessage(address _to);
+    event ReadMessage(address _of);
+
     function ChainMessage(string init) public {
         message[msg.sender] = init;
-        //assert(strcmp(init, message[msg.sender]));
     }
 
     function sendMessage(
@@ -21,14 +23,16 @@ contract ChainMessage {
         string _msg
     ) public {
         require(_to != 0x0);
+        SentMessage(_to);
         message[_to] = _msg;
-        //assert(strcmp(_msg, message[msg.sender]));
+        assert(strcmp(_msg, message[_to]));
     }
 
     function getMessage(
         address _of
-    ) public view returns (string _msg) {
+    ) public returns (string _msg) {
         require(_of != 0x0);
+        ReadMessage(_of);
         string memory s = message[_of];
         return s;
     }
@@ -38,6 +42,7 @@ contract ChainMessage {
     ) public {
         require(_of == msg.sender);
         message[msg.sender] = "";
+        assert(strcmp("", message[msg.sender]));
     }
 
     function strcmp(
