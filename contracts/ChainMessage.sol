@@ -24,14 +24,14 @@ contract ChainMessage {
         require(_to != 0x0);
         message[_to] = _msg;
         SentMessage(_to, _msg);
-        assert(strcmp(_msg, message[_to]));
+        //assert(strcmp(_msg, message[_to]));
     }
 
     function getMessage(
         address _of
     ) public view returns (string _msg) {
         require(_of != 0x0);
-        require(_of == msg.sender);
+        //require(_of == msg.sender);
         string memory s = message[_of];
         return s;
     }
