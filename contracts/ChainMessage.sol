@@ -11,7 +11,11 @@ contract ChainMessage {
 
     mapping (address => string) public message;
 
-    event SentMessage(address indexed _to, string _msg);
+    event SentMessage(
+		address indexed _from,
+		address indexed _to,
+		string _msg
+	);
 
     function ChainMessage(string init) public {
         message[msg.sender] = init;
@@ -23,7 +27,7 @@ contract ChainMessage {
     ) public {
         require(_to != 0x0);
         message[_to] = _msg;
-        SentMessage(_to, _msg);
+        SentMessage(msg.sender, _to, _msg);
         //assert(strcmp(_msg, message[_to]));
     }
 
